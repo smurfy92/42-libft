@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnequ.c                                       :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtranchi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/03 15:19:50 by jtranchi          #+#    #+#             */
-/*   Updated: 2015/12/03 15:19:50 by jtranchi         ###   ########.fr       */
+/*   Created: 2016/01/27 13:06:08 by jtranchi          #+#    #+#             */
+/*   Updated: 2016/02/10 00:03:33 by jtranchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int		ft_strnequ(char const *s1, char const *s2, size_t n)
+# include <fcntl.h>
+# include "libft.h"
+
+# define BUFF_SIZE 10
+
+typedef int	t_bool;
+
+typedef	struct		s_get
 {
-	int		i;
+	int				fd;
+	int				ret;
+}					t_get;
 
-	if (!n)
-		return (1);
-	if (s1 && s2 && n)
-	{
-		i = 0;
-		while (n > 0)
-		{
-			if (s1[i] != s2[i])
-				return (0);
-			i++;
-			n--;
-		}
-		return (1);
-	}
-	return (0);
-}
+typedef	struct		s_lst
+{
+	int				fd;
+	char			*rest;
+	struct s_lst	*next;
+}					t_lst;
+
+int					get_next_line(int const fd, char **line);
+
+#endif
